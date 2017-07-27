@@ -18,36 +18,8 @@ const getStaticNodeArray = nodeList => {
  * @param  {Node}   node    The DOM node to update
  * @param  {Array}  patches An array containing data about DOM manipulation
  */
-const performReconciliation = (node, patches, index) => {
-    patches
-        .forEach(patch => {
-            let parentNode;
-
-            switch (patch.type) {
-            // This can mean inserting a new Node or replacing an existing Node
-            case 'NODE':
-                parentNode = node.parentNode;
-                let newNode = render(patch.patch);
-
-                parentNode.appendChild(newNode);
-                break;
-
-            // This can mean inserting a new TextNode or replacing an existing TextNode
-            case 'TEXT':
-                node.textContent = patch;
-                break;
-
-            // This one is pretty self explanatory
-            case 'REMOVE':
-                parentNode = node.parentNode;
-
-                parentNode.removeChild(node);
-                break;
-
-            default:
-                // no op
-            }
-        });
+const performReconciliation = (node, patches) => {
+    // TODO
 };
 
 /**
@@ -61,20 +33,7 @@ const performReconciliation = (node, patches, index) => {
  *                          This needs to be an object because you can't pass primitives by reference
  */
 const reconcile = (node, patches, index = { index: 0 }) => {
-    const currentPatches = patches[index.index];
-    const nodeList = getStaticNodeArray(node.childNodes); 
-    
-    nodeList
-        .forEach(childNode => {
-            index.index += 1;
-
-            reconcile(childNode, patches, index);            
-        });
-
-    // Apply the patches to the actual DOM if there are any changes
-    if (currentPatches && currentPatches.length) {
-        performReconciliation(node, currentPatches, index);
-    }
+    // TODO
 };
 
 export default reconcile;
