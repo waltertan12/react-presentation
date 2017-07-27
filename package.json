@@ -17,5 +17,8 @@
   },
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server --progress --profile --colors"
+  },
+  "dependencies": {
+    "list-diff2": "^0.1.4"
   }
 }
