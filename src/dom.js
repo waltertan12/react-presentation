@@ -5,7 +5,16 @@
  * @return {Node}   domNode An actual DOM version of the given virtual node
  */
 export const render = vNode => {
-    // TODO
+    if (typeof vNode === 'string') {
+        return document.createTextNode(vNode);
+    }
+
+    const domNode = document.createElement(vNode.tagName);
+    vNode.children
+        .map(render)
+        .forEach(domNode.appendChild.bind(domNode));
+
+    return domNode;
 };
 
 /**

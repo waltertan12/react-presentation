@@ -14,7 +14,7 @@ console.log(App);
 
 // Mount the initial app
 const root = document.getElementById('app');
-// const mounted = mount(App, root);
+const mounted = mount(App, root);
 
 if (module.hot) {
     module.hot.accept();
