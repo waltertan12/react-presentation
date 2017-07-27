@@ -10,11 +10,20 @@ const App = (
     )
 );
 
-console.log(App);
+const nextApp = (
+    createNode('ul', {},
+        createNode('li', {}, 'Item one'),
+        createNode('li', {}, 'Item two'),
+        createNode('li', {}, 'Item three')
+    )
+);
 
 // Mount the initial app
 const root = document.getElementById('app');
 const mounted = mount(App, root);
+
+let patches = diff(App, nextApp);
+console.log(patches);
 
 if (module.hot) {
     module.hot.accept();
