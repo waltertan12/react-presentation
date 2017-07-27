@@ -19,11 +19,10 @@ const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
 
     prevChildren.forEach((prevChild, prevChildIndex) => {
         const nextChild = nextChildren[prevChildIndex];
-
+        
+        currentIndex += 1
         if (prevSibling && (prevSibling.count > 0)) {
-            currentIndex += prevSibling.count + 1;
-        } else {
-            currentIndex += 1;
+            currentIndex += prevSibling.count;
         }
 
         prevSibling = prevChild;
