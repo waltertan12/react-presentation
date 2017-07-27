@@ -61,7 +61,6 @@ const performReconciliation = (node, patches, index) => {
  *                          This needs to be an object because you can't pass primitives by reference
  */
 const reconcile = (node, patches, index = { index: 0 }) => {
-    console.log(node, index);
     const currentPatches = patches[index.index];
     const nodeList = getStaticNodeArray(node.childNodes); 
     
