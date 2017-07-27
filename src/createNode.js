@@ -8,7 +8,16 @@
  *                                       descendents
  */
 const createNode = (tagName, props, ...children) => {
-    return { };
+    const count = children.length +
+        children.reduce((descendents, child) => {
+            if (child.count) {
+                return descendents + child.count;
+            }
+
+            return descendents;
+        }, 0);
+
+    return { tagName, props, children, count };
 };
 
 export default createNode;
