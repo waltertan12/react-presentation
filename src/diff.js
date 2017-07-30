@@ -1,6 +1,6 @@
 import listDiff from 'list-diff2'
 
-const isVNode = vNode => (typeof vNode === 'object');
+const isVNode = vNode => (vNode && typeof vNode === 'object' && vNode.tagName);
 
 const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
     const prevChildren = prevNode.children;
@@ -19,11 +19,10 @@ const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
 
     prevChildren.forEach((prevChild, prevChildIndex) => {
         const nextChild = nextChildren[prevChildIndex];
-
+        
+        currentIndex += 1
         if (prevSibling && (prevSibling.count > 0)) {
-            currentIndex += prevSibling.count + 1;
-        } else {
-            currentIndex += 1;
+            currentIndex += prevSibling.count;
         }
 
         prevSibling = prevChild;
@@ -43,7 +42,7 @@ const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
 const _diff = (prevNode, nextNode, patches, index) => {
     const currentPatch = [];
 
-    if (typeof nextNode === 'undefined') {
+    if (prevNode && !nextNode) {
         // The list diff should take care of this case
 
     } else if (typeof prevNode === 'string'  && typeof nextNode === 'string') {
@@ -53,7 +52,7 @@ const _diff = (prevNode, nextNode, patches, index) => {
         } 
 
     // Nodes are the same
-    } else if (isVNode(prevNode) && isVNode(nextNode) && prevNode.tagName == nextNode.tagName) {
+    } else if (isVNode(prevNode) && isVNode(nextNode) && (prevNode.tagName === nextNode.tagName)) {
         // Diff the children now
         diffChildren(prevNode, nextNode, patches, currentPatch, index);
 
