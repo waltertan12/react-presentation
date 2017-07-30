@@ -3,6 +3,7 @@
 const Webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8888;
 
@@ -50,6 +51,7 @@ module.exports = {
     plugins: [
         new Webpack.NoEmitOnErrorsPlugin(),
         new Webpack.HotModuleReplacementPlugin(),
+        new DashboardPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src', 'template.html')
         }),
