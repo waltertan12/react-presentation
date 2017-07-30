@@ -32,13 +32,12 @@ const performReconciliation = (node, patches) => {
                     const moves = patch.patch;
 
                     // TODO: Create a map from key => childNode
-
                     moves
                         .forEach(move => {
                             const index = move.index;
                             if (move.type === REMOVE) {
                                 if (childNodeArray[index] === childNodes[index] && childNodes[index]) {
-                                    node.parentNode.removeChild(childNodes[index]);
+                                    node.removeChild(childNodes[index]);
                                 } 
 
                                 childNodeArray.splice(index, 1);
