@@ -44,13 +44,13 @@ import createNode from './src/createNode';
 
 const app = (
     createNode('div', {}
-        createNode('h1', {}, 'Hello, world!')
+        createNode('h1', {}, 'Hello, world :)')
     )
 );
 
 const nextApp = (
     createNode('div', {}
-        createNode('h1', {}, 'Goodbye, world :(!')
+        createNode('h1', {}, 'Goodbye, world :(')
     )
 );
 
@@ -60,12 +60,17 @@ const patches = diff(app, nextApp);
 reconcile(mounted, patches);
 ```
 
-You should also be able to use the the Babel plugin [`babel-plugin-transform-react-jsx`](https://babeljs.io/docs/plugins/transform-react-jsx/) though you'll have to add the plugin to this repo yourself.
+You are also be able to write in JSX via the the Babel plugin [`babel-plugin-transform-react-jsx`](https://babeljs.io/docs/plugins/transform-react-jsx/).
 ```javascript
-import createNode from './src/createNode'
+import createNode from './src/createNode';
+import { mount } from './src/dom;
 
-// @jsx createNode
 const app = <div>
     <h1>Hello, world!</h1>
 </div>;
+
+mount(
+    app,
+    document.getElementById('app')
+);
 ```
