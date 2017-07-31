@@ -34,6 +34,12 @@ module.exports = {
                     plugins: [
                         'transform-runtime', 
                         'transform-class-properties',
+                        [
+                            'transform-react-jsx',
+                            {
+                                pragma: 'createNode',
+                            }
+                        ],
                     ]
                 }
             }
