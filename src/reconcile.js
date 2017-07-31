@@ -58,7 +58,7 @@ const performReconciliation = (node, patches) => {
                     break;
 
                 case 'TEXT':
-                    node.textContent = patches.patch;
+                    node.textContent = patch.patch;
                     break;
 
                 default:
