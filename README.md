@@ -37,10 +37,10 @@ This demo is broken into 4 different stages
 
 ## Examples
 ```javascript
-import { dom } from './src/dom';
-import diff from './src/diff';
-import reconcile from '.src/reconcile';
-import createNode from './src/createNode';
+import { dom } from 'dom';
+import createNode from 'createNode';
+import diff from 'diff';
+import reconcile from 'reconcile';
 
 const app = (
     createNode('div', {}
@@ -62,8 +62,8 @@ reconcile(mounted, patches);
 
 You are also be able to write in JSX via the the Babel plugin [`babel-plugin-transform-react-jsx`](https://babeljs.io/docs/plugins/transform-react-jsx/).
 ```javascript
-import createNode from './src/createNode';
-import { mount } from './src/dom;
+import { mount } from 'dom';
+import createNode from 'createNode';
 
 const app = <div>
     <h1>Hello, world!</h1>
