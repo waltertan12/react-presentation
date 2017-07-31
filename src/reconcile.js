@@ -53,8 +53,8 @@ const performReconciliation = (node, patches) => {
 
                 case 'NODE':
                     const parentNode = node.parentNode;
-                    const newNode = render(patches.patch);
-                    parentNode.appendChild(newNode);
+                    const newNode = render(patch.patch);
+                    parentNode.replaceChild(newNode, node);
                     break;
 
                 case 'TEXT':
