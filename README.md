@@ -21,7 +21,7 @@ To run this project, you will need the following installed:
     - `yarn install`
 - Start the development server
     - `yarn start`
-- Go to `https://localhost:8888` in any browser
+- Go to [`https://localhost:8888`](https://localhost:8888) in any browser
     - If you are using port 8888 for another server, go into `webpack.config.js` and change the port number
 
 ## Stages
@@ -65,9 +65,11 @@ You are also be able to write in JSX via the the Babel plugin [`babel-plugin-tra
 import { mount } from 'dom';
 import createNode from 'createNode';
 
-const app = <div>
-    <h1>Hello, world!</h1>
-</div>;
+const app = (
+    <div>
+        <h1>Hello, world!</h1>
+    </div>
+);
 
 mount(
     app,
