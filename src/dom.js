@@ -1,4 +1,4 @@
-import { EventDelegator } from './eventDelegator';
+import { EventDelegator } from './EventDelegator';
 import { applyProps } from './applyProps';
 
 /**
@@ -42,4 +42,3 @@ export const mount = (vNode, root) => {
 
     return nodeToMount;
 };
-

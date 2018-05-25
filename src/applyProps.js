@@ -1,8 +1,16 @@
-import { isObject } from './utils';
-import { EventDelegator } from './eventDelegator';
+import { EventDelegator } from './EventDelegator';
+import { isObject } from './Utils';
 
+/**
+ * Removes a prop from a DOM node
+ *
+ * @param {Node}                   node
+ * @param {string}                 propKey
+ * @param {Object|string|function} prop
+ * @param {Object}                 prevProps
+ */
 const removeProp = (node, propKey, prop, prevProps) => {
-    // Previous props don't exist, so there's nothing to remove
+    // Previous props doesn't exist so there's nothing to remove
     if (!prevProps) {
         return;
     }
@@ -26,14 +34,13 @@ const removeProp = (node, propKey, prop, prevProps) => {
     }
 };
 
+/**
+ * @param  {Node}   node
+ * @param  {string} propKey
+ * @param  {Object} prop
+ * @param  {Object} prevProps Not sure if I need this
+ */
 const applyObjectProp = (node, propKey, prop, prevProps) => {
-    // const prevProp = prevProps ? prevProps[propKey] : undefined;
-
-    // TODO: 
-    if (false) {
-        // They are different types of objects
-    }
-
     // If previous prop was not an object but it has now turned into an objec
     if (!isObject(node[propKey])) {
         node[propKey] = {};
@@ -48,6 +55,7 @@ const applyObjectProp = (node, propKey, prop, prevProps) => {
 
             node[propKey][key] = (typeof attribute === 'undefined') ? emptyValue : attribute;
         });
+    
 };
 
 export const applyProps = (node, props, prevProps) => {
@@ -66,6 +74,7 @@ export const applyProps = (node, props, prevProps) => {
 
             } else if (propKey.substring(0, 2) === 'on' && typeof prop === 'function') {
                 const eventType = propKey.substring(2).toLowerCase();
+
                 EventDelegator.registerHandler(node, eventType, prop);
             }
         });

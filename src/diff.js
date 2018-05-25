@@ -1,6 +1,12 @@
 import listDiff from 'list-diff2'
-import { isObject } from './utils';
+import { isObject } from './Utils';
 
+/**
+ * Returns true if the the given argument is a virtual node
+ *
+ * @param  {mixed}   vNode
+ * @return {boolean}
+ */
 const isVNode = vNode => (vNode && typeof vNode === 'object' && vNode.tagName);
 
 /**
@@ -14,7 +20,7 @@ const getDiff = diff => (diff || {});
 /**
  * @param  {Object} prevProps
  * @param  {Object} nextProps
- * @return {}
+ * @return {Object} diff
  */
 const diffProps = (prevProps, nextProps) => {
     let diff;
@@ -42,7 +48,8 @@ const diffProps = (prevProps, nextProps) => {
                 if (Object.getPrototype(prevProp) !== Object.getPrototype(nextProp)) {
                     diff = getDiff();
                     diff[prevPropKey] = nextProp;
-                // Prototypes are the same so run diffProps on the props
+
+                // Prototypes are the same so find the diffs on those props
                 } else {
                     const propDiff = diffProps(prevProp, nextProp);
                     if (propDiff) {

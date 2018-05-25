@@ -1,10 +1,10 @@
 import createNode from 'createNode';
 import diff from 'diff';
-import reconcile from 'reconcile';
 import { mount } from 'dom';
+import { reconcile } from 'reconcile';
 
 let state = {
-    input: '¯\\_(ツ)_/¯',
+    input: '',
     todos: [],
 };
 
@@ -88,21 +88,21 @@ const TodoApp = (props) => createNode('div', { className: '' },
 
 // Mount the initial app
 const root = document.getElementById('app');
-let App = TodoApp(state);
-const mounted = mount(App, root);
+let app = TodoApp(state);
+const mounted = mount(app, root);
 
 const render = () => {
     console.log('NEXT STATE');
     console.log(state);
 
     const nextApp = TodoApp(state);
-    const patches = diff(App, nextApp);
+    const patches = diff(app, nextApp);
 
     console.log('DIFFS');
     console.log(patches);
 
     reconcile(mounted, patches);
-    App = nextApp;
+    app = nextApp;
 };
 
 if (module.hot) {
