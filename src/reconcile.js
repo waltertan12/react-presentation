@@ -1,11 +1,18 @@
-import { render } from './dom'
+import { render } from './dom';
+import { applyProps } from './applyProps';
 
+/**
+ * Returns an array version of a nodeList
+ *
+ * @param  {NodeList} nodeList
+ * @return {Node[]}   nodeArray
+ */
 const getStaticNodeArray = nodeList => {
     const nodeArray = [];
     const len = nodeList.length
 
     for (let i = 0; i < len; i += 1) {
-        let node = nodeList[i];
+        const node = nodeList[i];
         nodeArray.push(node);
     }
 
@@ -59,6 +66,10 @@ const performReconciliation = (node, patches) => {
 
                 case 'TEXT':
                     node.textContent = patch.patch;
+                    break;
+
+                case 'PROPS':
+                    applyProps(node, patch.patch, patch.node.props);
                     break;
 
                 default:

@@ -1,4 +1,5 @@
 import { EventDelegator } from './eventDelegator';
+import { applyProps } from './applyProps';
 
 /**
  * Turns virtual nodes into actual DOM nodes
@@ -20,25 +21,6 @@ export const render = vNode => {
         .forEach(domNode.appendChild.bind(domNode));
 
     return domNode;
-};
-
-const applyProps = (node, props) => {
-    Object.keys(props)
-        .forEach(propKey => {
-            const prop = props[propKey];
-
-            if (typeof prop === 'string' || typeof prop === 'number') {
-                node[propKey] = prop;
-            } else if (typeof prop === 'object') {
-                Object.keys(prop)
-                    .forEach(attributeName => {
-                        node[propKey][attributeName] = prop[attributeName];
-                    });
-            } else if (propKey.substring(0, 2) === 'on' && typeof prop === 'function') {
-                const eventType = propKey.substring(2).toLowerCase();
-                EventDelegator.registerHandler(node, eventType, prop);
-            }
-        });
 };
 
 /**

@@ -4,7 +4,7 @@ import reconcile from 'reconcile';
 import { mount } from 'dom';
 
 let state = {
-    input: '',
+    input: '¯\\_(ツ)_/¯',
     todos: [],
 };
 
@@ -46,7 +46,7 @@ const deleteTodoItem = (key) => {
     render();
 }
 
-const TodoApp = (state) => createNode('div', { className: '' }, 
+const TodoApp = (props) => createNode('div', { className: '' }, 
     createNode('h1', {}, 'Todo App'),
     createNode('div', { className: 'form-group' },
         createNode(
@@ -56,7 +56,7 @@ const TodoApp = (state) => createNode('div', { className: '' },
                 className: 'form-control',
                 type: 'text',
                 placeholder: 'Do laundry',
-                value: state.input,
+                value: props.input,
                 onKeyUp: onInputKeyUp
             }
         ),
@@ -71,7 +71,7 @@ const TodoApp = (state) => createNode('div', { className: '' },
     createNode(
         'ul',
         { id: 'list', className: 'list-group' },
-        ...state.todos.map((todoString, key) => {
+        ...props.todos.map((todoString, key) => {
             return createNode(
                 'li',
                 { className: 'list-group-item d-flex justify-content-between' },
@@ -92,11 +92,13 @@ let App = TodoApp(state);
 const mounted = mount(App, root);
 
 const render = () => {
+    console.log('NEXT STATE');
     console.log(state);
 
     const nextApp = TodoApp(state);
     const patches = diff(App, nextApp);
 
+    console.log('DIFFS');
     console.log(patches);
 
     reconcile(mounted, patches);
