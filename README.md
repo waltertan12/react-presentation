@@ -36,6 +36,8 @@ This demo is broken into 4 different stages
     - `git checkout stage-3`
 
 ## Examples
+Click [here](https://waltertan12.github.io/ReactPresentation) to see a live example.
+
 ```javascript
 import { dom } from 'dom';
 import createNode from 'createNode';
