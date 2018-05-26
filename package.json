@@ -13,11 +13,13 @@
     "html-webpack-plugin": "^2.29.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.3.0",
+    "webpack-cleanup-plugin": "^0.5.1",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.6.1"
   },
   "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server --progress --profile --colors"
+    "start": "webpack-dashboard -- webpack-dev-server --progress --profile --colors",
+    "build": "webpack --config ./webpack.prod.config.js --color"
   },
   "dependencies": {
     "list-diff2": "^0.1.4"

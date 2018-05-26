@@ -1,3 +1,6 @@
+import { EventDelegator } from './EventDelegator';
+import { applyProps } from './applyProps';
+
 /**
  * Turns virtual nodes into actual DOM nodes
  * 
@@ -10,6 +13,9 @@ export const render = vNode => {
     }
 
     const domNode = document.createElement(vNode.tagName);
+
+    applyProps(domNode, vNode.props);
+
     vNode.children
         .map(render)
         .forEach(domNode.appendChild.bind(domNode));
@@ -36,4 +42,3 @@ export const mount = (vNode, root) => {
 
     return nodeToMount;
 };
-

@@ -1,16 +1,5 @@
-import { render } from './dom'
-
-const getStaticNodeArray = nodeList => {
-    const nodeArray = [];
-    const len = nodeList.length
-
-    for (let i = 0; i < len; i += 1) {
-        let node = nodeList[i];
-        nodeArray.push(node);
-    }
-
-    return nodeArray;
-};
+import { render } from './dom';
+import { applyProps } from './applyProps';
 
 /**
  * Manipulate the DOM
@@ -27,7 +16,7 @@ const performReconciliation = (node, patches) => {
         .forEach(patch => {
             switch (patch.type) {
                 case 'REORDER':
-                    const childNodeArray = getStaticNodeArray(node.childNodes);
+                    const childNodeArray = Array.from(node.childNodes);
                     const childNodes = node.childNodes;
                     const moves = patch.patch;
 
@@ -61,6 +50,10 @@ const performReconciliation = (node, patches) => {
                     node.textContent = patch.patch;
                     break;
 
+                case 'PROPS':
+                    applyProps(node, patch.patch, patch.node.props);
+                    break;
+
                 default:
                     // no-op
             } 
@@ -69,6 +62,7 @@ const performReconciliation = (node, patches) => {
 
 /**
  * Apply the patches the diff algorithm found
+ *
  * The reconciler must traverse the tree the EXACT same way the diff traversed the tree, otherwise it will incorrectly
  * apply patches
  * 
@@ -77,9 +71,9 @@ const performReconciliation = (node, patches) => {
  * @param  {Object} index   The depth first index of the node
  *                          This needs to be an object because you can't pass primitives by reference
  */
-const reconcile = (node, patches, index = { index: 0 }) => {
+export const reconcile = (node, patches, index = { index: 0 }) => {
     const currentPatches = patches[index.index];
-    const nodeArray = getStaticNodeArray(node.childNodes);
+    const nodeArray = Array.from(node.childNodes);
 
     nodeArray
         .forEach(childNode => {
@@ -92,6 +86,3 @@ const reconcile = (node, patches, index = { index: 0 }) => {
         performReconciliation(node, currentPatches);
     }
 };
-
-export default reconcile;
-

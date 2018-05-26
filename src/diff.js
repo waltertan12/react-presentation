@@ -1,6 +1,82 @@
 import listDiff from 'list-diff2'
+import { isObject } from './Utils';
 
+/**
+ * Returns true if the the given argument is a virtual node
+ *
+ * @param  {mixed}   vNode
+ * @return {boolean}
+ */
 const isVNode = vNode => (vNode && typeof vNode === 'object' && vNode.tagName);
+
+/**
+ * Returns the given object or an empty object
+ *
+ * @param  {Object|undefined} diff
+ * @return {Object}
+ */
+const getDiff = diff => (diff || {});
+
+/**
+ * @param  {Object} prevProps
+ * @param  {Object} nextProps
+ * @return {Object} diff
+ */
+const diffProps = (prevProps, nextProps) => {
+    let diff;
+
+    // Diff the props
+    Object
+        .keys(prevProps)
+        .forEach(prevPropKey => {
+            // A prop has been removed
+            if (!nextProps.hasOwnProperty(prevPropKey)) {
+                diff = getDiff(diff);
+                diff[prevPropKey] = undefined;
+            }
+
+            const prevProp = prevProps[prevPropKey];
+            const nextProp = nextProps[prevPropKey];
+
+            // Props are the same
+            if (prevProp === nextProp) {
+                // no op
+
+            // Props are objects so we need to do additional checks
+            } else if (isObject(prevProp) && isObject(nextProp)) {
+                // Prototypes are different which means they are different
+                if (Object.getPrototype(prevProp) !== Object.getPrototype(nextProp)) {
+                    diff = getDiff();
+                    diff[prevPropKey] = nextProp;
+
+                // Prototypes are the same so find the diffs on those props
+                } else {
+                    const propDiff = diffProps(prevProp, nextProp);
+                    if (propDiff) {
+                        diff = getDiff(diff);
+                        diff[prevPropKey] = propDiff;
+                    }
+                }
+
+            // They are different
+            } else {
+                diff = getDiff(diff);
+                diff[prevPropKey] = nextProp;
+            }
+        });
+
+    // Check if there are any props that need to be added
+    Object
+        .keys(nextProps)
+        .forEach(nextPropKey => {
+            if (!prevProps.hasOwnProperty(nextPropKey)) {
+                diff = getDiff(diff);
+                diff[nextPropKey] = nextProps[nextPropKey];
+            }
+        });
+
+    return diff;
+};
 
 const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
     const prevChildren = prevNode.children;
@@ -27,7 +103,7 @@ const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
 
         prevSibling = prevChild;
 
-        _diff(prevChild, nextChild, patches, currentIndex);
+        performDiff(prevChild, nextChild, patches, currentIndex);
     });
 };
 
@@ -39,7 +115,7 @@ const diffChildren = (prevNode, nextNode, patches, currentPatch, index) => {
  * @return {Object}                  patches  An object with data for reconciliation
  * @param  {Number}                  index    The index of a specific node if traversing depth first
  */
-const _diff = (prevNode, nextNode, patches, index) => {
+const performDiff = (prevNode, nextNode, patches, index) => {
     const currentPatch = [];
 
     if (prevNode && !nextNode) {
@@ -53,6 +129,12 @@ const _diff = (prevNode, nextNode, patches, index) => {
 
     // Nodes are the same
     } else if (isVNode(prevNode) && isVNode(nextNode) && (prevNode.tagName === nextNode.tagName)) {
+        // Diff the props
+        const propsPatch = diffProps(prevNode.props, nextNode.props);
+        if (propsPatch) {
+            currentPatch.push({ type: 'PROPS', node: prevNode, patch: propsPatch });
+        }
+
         // Diff the children now
         diffChildren(prevNode, nextNode, patches, currentPatch, index);
 
@@ -76,7 +158,7 @@ const _diff = (prevNode, nextNode, patches, index) => {
 const diff = (prevNode, nextNode) => {
     const patches = {};
 
-    _diff(prevNode, nextNode, patches, 0);
+    performDiff(prevNode, nextNode, patches, 0);
 
     return patches;
 };
