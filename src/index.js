@@ -1,5 +1,5 @@
 import createNode from 'createNode';
-import diff from 'diff';
+import { diff } from 'Diff/diff';
 import { mount } from 'dom';
 import { reconcile } from 'reconcile';
 
@@ -46,7 +46,7 @@ const deleteTodoItem = (key) => {
     render();
 }
 
-const TodoApp = (props) => createNode('div', { className: '' }, 
+const TodoApp = (props) => createNode('div', {}, 
     createNode('h1', {}, 'Todo App'),
     createNode('div', { className: 'form-group' },
         createNode(

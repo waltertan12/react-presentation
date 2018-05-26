@@ -14,11 +14,14 @@ const performReconciliation = (node, patches) => {
 
     patches
         .forEach(patch => {
+            const parentNode = node.parentNode;
+
             switch (patch.type) {
                 case 'REORDER':
                     const childNodeArray = Array.from(node.childNodes);
                     const childNodes = node.childNodes;
                     const moves = patch.patch;
+
 
                     // TODO: Create a map from key => childNode
                     moves
@@ -41,9 +44,21 @@ const performReconciliation = (node, patches) => {
                     break;
 
                 case 'NODE':
-                    const parentNode = node.parentNode;
-                    const newNode = render(patch.patch);
-                    parentNode.replaceChild(newNode, node);
+                    if (parentNode) {
+                        parentNode.replaceChild(render(patch.patch), node);
+                    }
+                    break;
+
+                case 'INSERT':
+                    if (parentNode) {
+                        parentNode.appendChild(render(patch.patch), node);
+                    }
+                    break;
+
+                case 'REMOVE':
+                    if (parentNode) {
+                        parentNode.removeChild(node);
+                    }
                     break;
 
                 case 'TEXT':
