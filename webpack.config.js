@@ -4,7 +4,7 @@ const Webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const HOST = process.env.HOST || require('os').hostname();
+const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 8888;
 
 module.exports = {
