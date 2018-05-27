@@ -19,7 +19,8 @@
     "webpack-dev-server": "^2.6.1"
   },
   "scripts": {
-    "build": "yarn docker yarn build",
+    "build": "webpack --config webpack.prod.config.js --progress --profile --colors",
+    "build:docker": "yarn docker yarn build",
     "docker": "docker-compose run --rm virtual-dom",
     "start": "webpack-dev-server --progress --profile --colors"
   },
