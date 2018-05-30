@@ -1,4 +1,3 @@
-import { getKeyMap, REMOVE, INSERT } from 'Diffs/listDiff';
 import { applyProps } from 'DOM/applyProps';
 import { render } from 'DOM/render';
 
