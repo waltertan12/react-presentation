@@ -1,6 +1,6 @@
-import listDiff from 'list-diff2'
 import { diffProps } from 'Diff/diffProps';
 import { isObject, isVNode } from 'Utils';
+import { listDiff } from 'Diff/listDiff';
 
 /**
  * Diff the prevNode and nextNode
@@ -17,12 +17,8 @@ export const diffChildren = (prevNode, nextNode, currentPatch, index) => {
 
     const prevChildren = prevNode.children;
     let nextChildren = nextNode.children;
-    // const listPatch = listDiff(prevChildren, nextChildren, 'key');
-    // nextChildren = listPatch.children;
-
-    // if (listPatch.moves.length) {
-    //     currentPatch.push({ type: 'REORDER', node: prevNode, patch: listPatch.moves});
-    // }
+    const listPatch = listDiff(prevChildren, nextChildren);
+    nextChildren = listPatch.list;
 
     /* 
      * This is the child to the left of the current working child i.e. it is the left sibling
@@ -54,6 +50,10 @@ export const diffChildren = (prevNode, nextNode, currentPatch, index) => {
             const childPatch = diff(null, nextChild, patches, index);
             patches = Object.assign(patches, childPatch);
         });
+
+    if (listPatch.moves && (listPatch.moves.inserts.length || listPatch.moves.removes.length)) {
+        currentPatch.push({ type: 'REORDER', node: prevNode, patch: listPatch.moves});
+    }
 
     return patches;
 };

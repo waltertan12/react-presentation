@@ -1,5 +1,4 @@
-import { EventDelegator } from './EventDelegator';
-import { applyProps } from './applyProps';
+import { applyProps } from 'DOM/applyProps';
 
 /**
  * Turns virtual nodes into actual DOM nodes

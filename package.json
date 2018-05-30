@@ -22,9 +22,8 @@
     "build": "webpack --config webpack.prod.config.js --progress --profile --colors",
     "build:docker": "yarn docker yarn build",
     "docker": "docker-compose run --rm virtual-dom",
-    "start": "webpack-dev-server --progress --profile --colors"
+    "start": "webpack-dev-server --progress --profile --colors",
+    "start:docker": "docker-compose down && docker-compose up"
   },
-  "dependencies": {
-    "list-diff2": "^0.1.4"
-  }
+  "dependencies": {}
 }
