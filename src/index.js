@@ -29,7 +29,7 @@ const onButtonClick = event => {
         state, 
         {
             input: '',
-            todos: state.todos.concat([ nextTodo ]),
+            todos: state.todos.concat([ { content: nextTodo, timestamp: Date.now() } ]),
         }
     );
 
@@ -70,11 +70,11 @@ const TodoApp = (props) => createNode('div', {},
     createNode(
         'ul',
         { id: 'list', className: 'list-group' },
-        ...props.todos.map((todoString, key) => {
+        ...props.todos.map((todo, key) => {
             return createNode(
                 'li',
-                { className: 'list-group-item d-flex justify-content-between' },
-                todoString,
+                { className: 'list-group-item d-flex justify-content-between', key: todo.timestamp },
+                todo.content,
                 createNode(
                     'button',
                     { className: 'btn btn-danger', onClick: () => deleteTodoItem(key) },
