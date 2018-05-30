@@ -24,7 +24,5 @@
     "start": "webpack-dev-server --progress --profile --colors",
     "start:docker": "docker-compose down && docker-compose up"
   },
-  "dependencies": {
-    "list-diff2": "^0.1.4"
-  }
+  "dependencies": {}
 }

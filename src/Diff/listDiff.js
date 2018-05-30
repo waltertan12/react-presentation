@@ -1,4 +1,4 @@
-export const DELETE = 1;
+export const REMOVE = 1;
 export const INSERT = 0;
 
 const getKey = item => {

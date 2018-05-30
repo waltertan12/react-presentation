@@ -1,3 +1,4 @@
+import { getKeyMap, REMOVE, INSERT } from 'Diffs/listDiff';
 import { applyProps } from 'DOM/applyProps';
 import { render } from 'DOM/render';
 
@@ -8,10 +9,6 @@ import { render } from 'DOM/render';
  * @param  {Array}  patches An array containing data about DOM manipulation
  */
 const performReconciliation = (node, patches) => {
-    // The list-diff2 library defines these constants
-    const REMOVE = 0;
-    const INSERT = 1;
-
     patches
         .forEach(patch => {
             const parentNode = node.parentNode;
@@ -21,26 +18,23 @@ const performReconciliation = (node, patches) => {
                     const childNodeArray = Array.from(node.childNodes);
                     const childNodes = node.childNodes;
                     const moves = patch.patch;
+                    const removes = moves.removes;
+                    const inserts = moves.inserts;
+                    const keyMap = {};
 
+                    removes.forEach(remove => {
+                        const childNode = childNodes[remove.from];
+                        if (remove.key) {
+                            keyMap[remove.key] = childNode;
+                        }
 
-                    // TODO: Create a map from key => childNode
-                    moves
-                        .forEach(move => {
-                            const index = move.index;
-                            if (move.type === REMOVE) {
-                                if (childNodeArray[index] === childNodes[index] && childNodes[index]) {
-                                    node.removeChild(childNodes[index]);
-                                } 
+                        node.removeChild(childNode);
+                    });
 
-                                childNodeArray.splice(index, 1);
-                            } else if (move.type === INSERT) {
-                                // TODO: Use key map instead of rendering new nodes all the time 
-                                const nodeToInsert = render(move.item);
-
-                                childNodeArray.splice(index, 0, nodeToInsert);
-                                node.insertBefore(nodeToInsert, childNodes[index] || null);
-                            }
-                        });
+                    inserts.forEach(insert => {
+                        const childNode = keyMap[insert.to];
+                        node.insertBefore(childNode, childNodes[insert.to] || null);
+                    });
                     break;
 
                 case 'NODE':
