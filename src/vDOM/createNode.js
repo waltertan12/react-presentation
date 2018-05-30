@@ -7,7 +7,7 @@
  * @return {Object}                      A virtual node aka an object with tagName, props, children, and count of
  *                                       descendents
  */
-const createNode = (tagName, props, ...children) => {
+export const createNode = (tagName, props, ...children) => {
     const count = children.length +
         children.reduce((descendents, child) => {
             if (child.count) {
@@ -19,6 +19,3 @@ const createNode = (tagName, props, ...children) => {
 
     return { tagName, props, children, count };
 };
-
-export default createNode;
-

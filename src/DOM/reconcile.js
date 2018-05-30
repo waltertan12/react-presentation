@@ -1,5 +1,5 @@
-import { render } from './dom';
-import { applyProps } from './applyProps';
+import { applyProps } from 'DOM/applyProps';
+import { render } from 'DOM/render';
 
 /**
  * Manipulate the DOM

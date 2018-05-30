@@ -1,7 +1,6 @@
-import createNode from 'createNode';
-import { diff } from 'Diff/diff';
-import { mount } from 'dom';
-import { reconcile } from 'reconcile';
+import { createNode } from 'vDOM';
+import { diff } from 'Diff';
+import { mount, reconcile } from 'DOM';
 
 let state = {
     input: '',

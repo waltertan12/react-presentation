@@ -1,5 +1,5 @@
-import { EventDelegator } from './EventDelegator';
-import { isObject } from './Utils';
+import { EventDelegator } from 'EventDelegator';
+import { isObject } from 'Utils';
 
 /**
  * Removes a prop from a DOM node
