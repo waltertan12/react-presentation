@@ -1,15 +1,16 @@
 const Webpack = require('webpack');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
     entry: [
-        path.resolve(__dirname, 'src', 'index.js'),
+        path.resolve(__dirname, 'src', 'demo.js'),
     ],
     devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'bundle.js',
+        filename: 'demo.[chunkhash].js',
     },
     resolve: {
         extensions: ['.js'],
@@ -26,6 +27,7 @@ module.exports = {
                     plugins: [
                         'transform-runtime', 
                         'transform-class-properties',
+                        'transform-object-rest-spread',
                         [
                             'transform-react-jsx',
                             {
@@ -43,11 +45,11 @@ module.exports = {
             compress: {
                 warnings: false,
                 screw_ie8: true,
-                drop_console: true,
+                drop_console: false,
                 drop_debugger: true,
             },
             comments: false,
-            console: false,
+            console: true,
             mangle: true,
         }),
         new Webpack.DefinePlugin({
@@ -57,5 +59,9 @@ module.exports = {
         }),
         new Webpack.optimize.AggressiveMergingPlugin(),
         new Webpack.optimize.OccurrenceOrderPlugin(),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'template.html'),
+            filename: '../index.html',
+        }),
     ],
 };
