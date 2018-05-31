@@ -106,7 +106,7 @@ export const diff = (prevNode, nextNode, patches = {}, index = 0) => {
 
     // Nodes are different types, replace them
     } else {
-        currentPatch.push({ type: 'NODE', node: prevNode, patch: nextNode });
+        currentPatch.push({ type: 'REPLACE', node: prevNode, patch: nextNode });
     }
 
     // Insert the current patch to the total list of patches

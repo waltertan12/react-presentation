@@ -36,7 +36,7 @@ const performReconciliation = (node, patches) => {
                     });
                     break;
 
-                case 'NODE':
+                case 'REPLACE':
                     if (parentNode) {
                         parentNode.replaceChild(render(patch.patch), node);
                     }
