@@ -9,7 +9,7 @@ let state = {
 
 const onInputKeyUp = (event) => {
     // Update the application state
-    state = Object.assign({}, state, { input: event.target.value });
+    state = { ...state, input: event.target.value };
 
     // Re-render the app
     render();
@@ -24,14 +24,11 @@ const onButtonClick = event => {
     const nextTodo = state.input.trim();
 
     // Update the application state
-    state = Object.assign(
-        {},
-        state, 
-        {
-            input: '',
-            todos: state.todos.concat([ { content: nextTodo, timestamp: Date.now() } ]),
-        }
-    );
+    state = {
+        ...state, 
+        input: '',
+        todos: [ ...state.todos, { content: nextTodo, timestamp: Date.now() } ],
+    };
 
     render();
 };
@@ -40,7 +37,7 @@ const deleteTodoItem = (key) => {
     const nextTodos = state.todos.slice();
     nextTodos.splice(key, 1);
 
-    state = Object.assign({}, state, { todos: nextTodos });
+    state = { ...state, todos: nextTodos };
 
     render();
 }

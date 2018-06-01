@@ -11,7 +11,7 @@ module.exports = {
     entry: [
         `webpack-dev-server/client?http://${HOST}:${PORT}`,
         'webpack/hot/only-dev-server',
-        path.resolve(__dirname, 'src', 'index.js'),
+        path.resolve(__dirname, 'src', 'demo.js'),
     ],
     devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
     output: {
@@ -34,6 +34,7 @@ module.exports = {
                     plugins: [
                         'transform-runtime', 
                         'transform-class-properties',
+                        'transform-object-rest-spread',
                         [
                             'transform-react-jsx',
                             {

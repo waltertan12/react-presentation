@@ -28,6 +28,7 @@ module.exports = {
                     plugins: [
                         'transform-runtime', 
                         'transform-class-properties',
+                        'transform-object-rest-spread',
                         [
                             'transform-react-jsx',
                             {

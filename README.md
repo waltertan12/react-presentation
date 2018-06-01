@@ -16,7 +16,7 @@ To run this project, you will need the following installed:
 - Clone the repository and `cd` into it
     - `git clone https://github.com/waltertan12/ReactPresentation.git && cd ReactPresentation`
 - Start the development server
-    - `yarn start`
+    - `yarn docker:start`
 - Go to [`https://0.0.0.0:8888`](https://localhost:8888) in any browser
     - If you are using port 8888 for another server, go into `webpack.config.js` and change the port number
 
