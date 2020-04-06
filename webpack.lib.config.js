@@ -14,36 +14,38 @@ module.exports = {
         filename: 'lib.min.js',
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: [ '.js', '.jsx', '.ts', '.tsx', '.json' ],
         modules: [ path.resolve(__dirname, 'src'), 'node_modules' ],
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|ts|jsx|tsx)$/,
                 exclude: /(node_modules\/)/,
                 loader: 'babel-loader',
                 query: {
-                    presets: [ 'es2015' ],
+                    presets: [
+                        '@babel/preset-env',
+                        '@babel/typescript',
+                    ],
                     plugins: [
-                        'transform-runtime', 
-                        'transform-class-properties',
-                        'transform-object-rest-spread',
+                        '@babel/transform-runtime', 
+                        '@babel/proposal-class-properties',
                         [
-                            'transform-react-jsx',
+                            '@babel/transform-react-jsx',
                             {
                                 pragma: 'createNode',
-                            }
+                            },
                         ],
-                    ]
-                }
-            }
-        ]   
+                    ],
+                },
+            },
+        ],
     },
     plugins: [
         new Webpack.optimize.ModuleConcatenationPlugin(),
         new WebpackCleanupPlugin(),
-        new Webpack.optimize.UglifyJsPlugin(),
+        new Webpack.optimize.TerserPlugin(),
         new Webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),

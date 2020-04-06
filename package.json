@@ -3,20 +3,21 @@
   "version": "1.0.0",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-runtime": "^6.23.0",
-    "html-webpack-plugin": "^2.29.0",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.3.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "html-webpack-plugin": "^4.0.4",
+    "style-loader": "^1.1.3",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
     "webpack-cleanup-plugin": "^0.5.1",
-    "webpack-dashboard": "^0.4.0",
-    "webpack-dev-server": "^2.6.1"
+    "webpack-cli": "^3.3.11",
+    "webpack-dashboard": "^3.2.0",
+    "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
     "build:demo": "webpack --config webpack.demo.config.js --progress --profile --colors",
@@ -25,7 +26,9 @@
     "docker:build:demo": "yarn docker yarn build:demo",
     "docker:build:lib": "yarn docker yarn build:lib",
     "docker:start": "docker-compose down && docker-compose up",
-    "start": "webpack-dev-server --progress --profile --colors"
+    "start": "webpack-dashboard -- webpack-dev-server --progress --profile --colors"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.9.4"
+  }
 }
