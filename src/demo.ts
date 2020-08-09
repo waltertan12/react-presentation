@@ -31,7 +31,7 @@ const onDeleteTodo = (index: number) => {
 const root = document.getElementById('app');
 let app = Router({
     path: window.location.pathname,
-    basePath: '',
+    basePath: '/react-presentation',
     todoAppProps: {
         onSubmit,
         onKeyUp,
@@ -45,7 +45,7 @@ const render = () => {
     const  { query } = qs.parseUrl(window.location.href);
     const nextApp = Router({
         path: window.location.pathname,
-        basePath: '',
+        basePath: '/react-presentation',
         todoAppProps: {
             onSubmit,
             onKeyUp,
