@@ -1,4 +1,4 @@
-import { applyProps } from 'DOM/applyProps';
+import { applyProps } from './apply-props';
 
 const workLoop = deadline => {
   let shouldYield = false
@@ -15,7 +15,7 @@ const workLoop = deadline => {
 
 /**
  * Turns virtual nodes into actual DOM nodes
- * 
+ *
  * @param  {Object} vNode   An object representing a Node (and its children) in the DOM
  * @return {Node}   domNode An actual DOM version of the given virtual node
  */

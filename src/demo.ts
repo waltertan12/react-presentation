@@ -1,10 +1,10 @@
 import { Router } from "./demo/router";
-import { SyntheticEvent } from "./EventDelegator/SyntheticEvent";
+import { SyntheticEvent } from './event-delegator/synthetic-event';
 // @ts-ignore
-import { diff } from 'Diff';
+import { diff } from 'diff';
 import { getState, setState} from './demo/app-state';
 // @ts-ignore
-import { mount, reconcile } from 'DOM';
+import { mount, reconcile } from 'dom';
 import qs from 'query-string';
 
 // Do some stuff w/ state

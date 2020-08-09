@@ -1,4 +1,4 @@
-import { createNode } from '../vDOM';
+import { createNode } from '../virtual-dom';
 
 export const NotFound = () => (
     createNode('div', { className: 'container' },

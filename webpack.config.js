@@ -60,7 +60,6 @@ module.exports = {
     },
     plugins: [
 		new ForkTsCheckerWebpackPlugin(),
-        new Webpack.NoEmitOnErrorsPlugin(),
         new Webpack.HotModuleReplacementPlugin(),
         new DashboardPlugin(),
         new HtmlWebpackPlugin({

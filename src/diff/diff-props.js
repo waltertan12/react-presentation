@@ -1,4 +1,4 @@
-import { isObject } from 'Utils';
+import { isObject } from '../utils';
 
 /**
  * Returns the given object or an empty object

@@ -1,3 +1,3 @@
-export { createNode } from 'vDOM';
-export { diff } from 'Diff';
-export { mount, reconcile, render } from 'DOM';
+export { createNode } from 'src/virtual-dom';
+export { diff } from 'diff';
+export { mount, reconcile, render } from 'dom';

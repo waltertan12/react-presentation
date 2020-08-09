@@ -1,4 +1,4 @@
-import { createNode } from '../vDOM';
+import { createNode } from '../virtual-dom';
 
 interface MenuProps {
 	basePath: string;

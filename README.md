@@ -1,10 +1,10 @@
 # React Presentation
 React Presentation is a repo to help explain the benefits of the virtual DOM. This repo contains the essentials
 of a virtual DOM, including the following:
-- [Virtual DOM markup](./src/vDOM/createNode.js)
-- [Rendering VDOM to the DOM](./src/DOM/render.js)
-- [Diffing](./src/Diff/diff.js)
-- [Reconciliation](./src/DOM/reconcile.js)
+- [Virtual DOM markup](src/virtual-dom/createNode.js)
+- [Rendering VDOM to the DOM](src/dom/render.js)
+- [Diffing](src/diff/diff.js)
+- [Reconciliation](src/dom/reconcile.js)
 
 ## Requirements
 To run this project, you will need the following installed:
@@ -24,9 +24,9 @@ To run this project, you will need the following installed:
 Click [here](https://waltertan12.github.io/ReactPresentation) to see a live example.
 
 ```javascript
-import { createNode } from 'vDOM';
-import { diff } from 'Diff';
-import { mount, reconcile } from 'DOM';
+import { createNode } from 'src/virtual-dom';
+import { diff } from 'src/diff';
+import { mount, reconcile } from 'src/dom';
 
 const app = (
     createNode('div', {}

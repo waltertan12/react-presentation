@@ -1,5 +1,5 @@
-import { EventDelegator } from 'EventDelegator';
-import { isObject } from 'Utils';
+import { EventDelegator } from '../event-delegator';
+import { isObject } from '../utils';
 
 /**
  * Removes a prop from a DOM node
@@ -20,7 +20,7 @@ const removeProp = (node, propKey, prop, prevProps) => {
         Object
             .keys(prevProp)
             forEach(styleName => {
-                node.style[styleName] = ''; 
+                node.style[styleName] = '';
             });
 
     } else if (propKey === 'attributes') {
@@ -55,7 +55,7 @@ const applyObjectProp = (node, propKey, prop, prevProps) => {
 
             node[propKey][key] = (typeof attribute === 'undefined') ? emptyValue : attribute;
         });
-    
+
 };
 
 export const applyProps = (node, props, prevProps) => {

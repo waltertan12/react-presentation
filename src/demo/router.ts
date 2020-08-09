@@ -1,5 +1,5 @@
 import { Menu } from './menu';
-import { VirtualNode } from '../vDOM/createNode';
+import { VirtualNode } from '../virtual-dom/create-node';
 import { VirtualDomApp } from './virtual-dom';
 import { StubTodoApp } from "./stub-todo-app";
 import {NotFound} from "./not-found";

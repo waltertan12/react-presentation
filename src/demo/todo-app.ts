@@ -1,5 +1,5 @@
-import { createNode } from '../vDOM';
-import { SyntheticEvent } from '../EventDelegator/SyntheticEvent';
+import { createNode } from '../virtual-dom';
+import { SyntheticEvent } from '../event-delegator/synthetic-event';
 import { Todo } from "./todo";
 
 export interface TodoAppProps {

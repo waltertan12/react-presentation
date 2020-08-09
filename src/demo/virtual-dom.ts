@@ -1,5 +1,5 @@
 import hljs from 'highlightjs';
-import { createNode } from "../vDOM";
+import { createNode } from "../virtual-dom";
 import { StubTodoApp } from './stub-todo-app';
 
 const value = hljs.highlight('json', JSON.stringify(StubTodoApp, null, 4)).value;

@@ -1,4 +1,4 @@
-import { applyProps } from 'DOM/applyProps';
+import { applyProps } from './apply-props';
 
 /**
  * Turns virtual nodes into actual DOM nodes

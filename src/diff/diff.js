@@ -1,6 +1,6 @@
-import { diffProps } from 'Diff/diffProps';
-import { isObject, isVNode } from 'Utils';
-import { listDiff } from 'Diff/listDiff';
+import { diffProps } from './diff-props';
+import { isVNode } from '../utils';
+import { listDiff } from './list-diff';
 
 /**
  * Diff the prevNode and nextNode
@@ -20,7 +20,7 @@ export const diffChildren = (prevNode, nextNode, currentPatch, index) => {
     const listPatch = listDiff(prevChildren, nextChildren);
     nextChildren = listPatch.list;
 
-    /* 
+    /*
      * This is the child to the left of the current working child i.e. it is the left sibling
      *
      * We let it be undefined initially because the first node will have no left sibling
@@ -32,7 +32,7 @@ export const diffChildren = (prevNode, nextNode, currentPatch, index) => {
 
     prevChildren.forEach((prevChild, prevChildIndex) => {
         const nextChild = nextChildren[prevChildIndex];
-        
+
         currentIndex += 1
         if (prevSibling && (prevSibling.count > 0)) {
             currentIndex += prevSibling.count;
@@ -62,7 +62,7 @@ export const diffChildren = (prevNode, nextNode, currentPatch, index) => {
  * Diff the prevNode and nextNode
  *
  * This traverses the virutal DOM tree in a depth-first preorder fashion
- * 
+ *
  * @param  {Object|String|undefined} prevNode
  * @param  {Object|String|undefined} nextNode
  * @return {Object}                  patches  An object with data for reconciliation
@@ -83,8 +83,8 @@ export const diff = (prevNode, nextNode, patches = {}, index = 0) => {
     } else if (typeof prevNode === 'string' && typeof nextNode === 'string') {
         // If the text nodes do not have the same text, replace it; otherwise, do nothing
         if (prevNode !== nextNode) {
-            currentPatch.push({ type: 'TEXT', node: prevNode, patch: nextNode }); 
-        } 
+            currentPatch.push({ type: 'TEXT', node: prevNode, patch: nextNode });
+        }
 
     // Nodes are the same type
     } else if (isVNode(prevNode) && isVNode(nextNode) && (prevNode.tagName === nextNode.tagName)) {

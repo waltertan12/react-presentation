@@ -1,11 +1,11 @@
-import { SyntheticEvent } from './SyntheticEvent';
+import { SyntheticEvent } from './synthetic-event';
 
 // Private variables
 const KEY = 'EVENT_DELEGATOR_KEY';
 const registeredEvents = new Set();
 
 /**
- * EventDelegator is a document level event listener that to listens to events for the entire app 
+ * EventDelegator is a document level event listener that to listens to events for the entire app
  * and invokes a handler on behalf of a targeted node
  */
 export const EventDelegator = {
@@ -52,7 +52,7 @@ export const EventDelegator = {
         if (!node[KEY]) {
             node[KEY] = {};
         }
-  
+
         // Only one handler per event type
         node[KEY][eventType] = handler;
     },
@@ -76,7 +76,7 @@ export const EventDelegator = {
 
             return;
         }
-  
+
         // Otherwise, invoke the handler
         node[KEY][eventType](syntheticEvent);
     },
