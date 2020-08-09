@@ -2,10 +2,11 @@ const Webpack = require('webpack');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     entry: [
-        path.resolve(__dirname, 'src', 'demo.js'),
+        path.resolve(__dirname, 'src', 'demo.ts'),
     ],
     devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
     output: {
@@ -28,7 +29,7 @@ module.exports = {
                         '@babel/typescript',
                     ],
                     plugins: [
-                        '@babel/transform-runtime', 
+                        '@babel/transform-runtime',
                         '@babel/proposal-class-properties',
                         [
                             '@babel/transform-react-jsx',
@@ -42,6 +43,7 @@ module.exports = {
         ],
     },
     plugins: [
+		new ForkTsCheckerWebpackPlugin(),
         new WebpackCleanupPlugin(),
         new Webpack.optimize.UglifyJsPlugin({
             compress: {

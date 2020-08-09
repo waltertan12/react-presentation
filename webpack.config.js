@@ -4,6 +4,7 @@ const Webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 8888;
 
@@ -11,7 +12,7 @@ module.exports = {
     entry: [
         `webpack-dev-server/client?http://${HOST}:${PORT}`,
         'webpack/hot/only-dev-server',
-        path.resolve(__dirname, 'src', 'demo.js'),
+        path.resolve(__dirname, 'src', 'demo.ts'),
     ],
     devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
     output: {
@@ -35,7 +36,7 @@ module.exports = {
                         '@babel/typescript',
                     ],
                     plugins: [
-                        '@babel/transform-runtime', 
+                        '@babel/transform-runtime',
                         '@babel/proposal-class-properties',
                         [
                             '@babel/transform-react-jsx',
@@ -58,6 +59,7 @@ module.exports = {
         https: true,
     },
     plugins: [
+		new ForkTsCheckerWebpackPlugin(),
         new Webpack.NoEmitOnErrorsPlugin(),
         new Webpack.HotModuleReplacementPlugin(),
         new DashboardPlugin(),

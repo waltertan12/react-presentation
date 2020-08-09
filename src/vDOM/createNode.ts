@@ -1,3 +1,14 @@
+export interface Prop {
+	[key: string]: string | number | boolean | Function | Prop;
+}
+
+export interface VirtualNode {
+	tagName: string;
+	props: Prop;
+	count: number;
+	children: (string | VirtualNode)[];
+}
+
 /**
  * Creates a virtual node
  * 
@@ -7,10 +18,10 @@
  * @return {Object}                      A virtual node aka an object with tagName, props, children, and count of
  *                                       descendents
  */
-export const createNode = (tagName, props, ...children) => {
+export const createNode = (tagName: string, props: Prop, ...children: (string | VirtualNode)[]): VirtualNode => {
     const count = children.length +
-        children.reduce((descendents, child) => {
-            if (child.count) {
+        children.reduce((descendents: number, child: VirtualNode | string) => {
+            if (typeof child !== 'string' && child.count) {
                 return descendents + child.count;
             }
 
