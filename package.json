@@ -24,8 +24,8 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "build:demo": "webpack --config webpack.demo.config.js --progress --profile --colors",
-    "build:lib": "webpack --config webpack.lib.config.js --progress --profile --colors",
+    "build:demo": "webpack --config webpack.demo.config.js --progress --profile --colors --env production",
+    "build:lib": "webpack --config webpack.lib.config.js --progress --profile --colors --env production",
     "docker": "docker-compose run --rm virtual-dom",
     "docker:build:demo": "yarn docker yarn build:demo",
     "docker:build:lib": "yarn docker yarn build:lib",

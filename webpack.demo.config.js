@@ -5,6 +5,7 @@ const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
+    mode: 'production',
     entry: [
         path.resolve(__dirname, 'src', 'demo.ts'),
     ],
@@ -45,17 +46,6 @@ module.exports = {
     plugins: [
 		new ForkTsCheckerWebpackPlugin(),
         new WebpackCleanupPlugin(),
-        new Webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                drop_console: false,
-                drop_debugger: true,
-            },
-            comments: false,
-            console: true,
-            mangle: true,
-        }),
         new Webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),
